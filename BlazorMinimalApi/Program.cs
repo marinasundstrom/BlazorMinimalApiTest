@@ -49,7 +49,12 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/server", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPage>());
 
-app.MapGet("/wasm", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPageWasm>());
+app.MapGet("/wasm", (int incrementBy) => {
+    var parameters = new Dictionary<string, object> {
+        { nameof(BlazorMinimalApi.Components.MyPageWasm.IncrementBy), incrementBy }
+    };
+    return new RazorComponentResult<BlazorMinimalApi.Components.MyPageWasm>(parameters);
+});
 
 
 app.MapBlazorHub();

@@ -9,8 +9,12 @@
 <body>
     <h1>Interactive Web Assembly component</h1>
 
-    <Client.Counter />
+    <Client.Counter IncrementBy="@IncrementBy" />
 
     <script src="_framework/blazor.web.js"></script>
 </body>
 </html>
+
+@code {
+    [Parameter] public int IncrementBy { get; set; }
+}

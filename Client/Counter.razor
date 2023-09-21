@@ -11,6 +11,8 @@
 
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount += IncrementBy;
     }
+
+    [Parameter] public int IncrementBy { get; set; } = 1;
 }
