@@ -1,18 +1,22 @@
 # Minimal API with interactive Razor component
 
-Serving Razor component through Minimal API endpoint - in .NET 8.
-
-Based on the ``dotnet new webapi`` template. Adds code that exposes the ``blazor.web.js`` script as a static file.
+Serving interactive Razor component through Minimal API endpoint - in .NET 8.
 
 ![BöazorWasm](https://github.com/marinasundstrom/BlazorMinimalApiTest/assets/919580/697ddb62-9a1a-40bb-b97c-882b95875b99)
 
-Both Server and WebAssembly (below).
+## Description
+
+Based on the ``dotnet new webapi`` template. Adds extension method that exposes the ``blazor.web.js`` script as a static file.
+
+To enable client WebAssembly support, there is another extension method that serves those files, including ``dotnet.js``.
+
+bGuides for oth Server and WebAssembly below.
 
 Endpoints: http://localhost:5277/server and http://localhost:5277/wasm
 
-Links to resources below.
+[FAQ](#frequently-asked-questions) and [Links](#links) to resources at the bottom.
 
-## Changes
+## Interactive Server components with Minimal API
 
 Created components:
 
@@ -46,21 +50,9 @@ app.MapBlazorHub();
 
 ## ``UseBlazorWebJS``
 
-Adds the route serving the ``blazor.web.js``
+Adds the route serving the ``blazor.web.js``, which is essential to all interactivity.
 
 Based on [this file](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79bf5bc84098ea8d347ef358cc/src/Components/Endpoints/src/Builder/RazorComponentsEndpointRouteBuilderExtensions.cs#L28).
-
-## Why not invoke ``MapRazorComponents<T>``?
-
-Since it maps components to routes automatically - and you want the control over the endpoints.
-
-## What about layouts?
-
-Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``. We aren't using, and  we can't use this here.
-
-This is thus no direct replacement for the MVC and Razor Views.
-
-If layouts are important to you, then I recommend you to consider routable page components. (See "Add routable pages" below)
 
 ## Adding WebAssembly support
 
@@ -113,7 +105,7 @@ It is important that the WebAssembly component lives in the client project, othe
 
 **Recommended for ordinary apps**
 
-If you want something similar to Razor Pages, then you can enable the standard page component routing. This is provided that you have declared the router in the root ``App`` component.
+You can enable the standard page component routing, which works for both SSR and interactive pages. This is provided that you have declared the router in the root ``App`` component.
 
 ```cs
 app.MapRazorComponents<App>()
@@ -139,6 +131,20 @@ And add the ``@page`` directive to your page components:
 ```razor
 @page "/my-route"
 ```
+
+## Frequently asked questions
+
+### Why not invoke ``MapRazorComponents<T>``?
+
+Since it maps components to routes automatically - and you want the control over the endpoints.
+
+### What about layouts?
+
+Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``. We aren't using, and  we can't use this here.
+
+This is thus no direct replacement for the MVC and Razor Views.
+
+If layouts are important to you, then I recommend you to consider routable page components. (See "Add routable pages" below)
 
 ## Notes
 
