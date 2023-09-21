@@ -4,6 +4,8 @@ Serving Razor component through Minimal API endpoint - in .NET 8.
 
 Based on the ``dotnet new webapi`` template. Adds code that exposes the ``blazor.web.js`` script as a static file.
 
+![BöazorWasm](https://github.com/marinasundstrom/BlazorMinimalApiTest/assets/919580/697ddb62-9a1a-40bb-b97c-882b95875b99)
+
 Both Server and WebAssembly (below).
 
 Endpoints: http://localhost:5277/server and http://localhost:5277/wasm
