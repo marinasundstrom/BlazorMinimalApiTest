@@ -9,7 +9,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRazorComponents()
-    .AddServerComponents();
+    .AddServerComponents()
+    .AddWebAssemblyComponents();
 
 var app = builder.Build();
 
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseBlazorWebJS();
+
+app.UseBlazorWebAssemblyRenderMode();
 
 var summaries = new[]
 {
@@ -44,7 +47,10 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/test", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPage>());
+app.MapGet("/server", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPage>());
+
+app.MapGet("/wasm", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPageWasm>());
+
 
 app.MapBlazorHub();
 

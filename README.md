@@ -4,7 +4,9 @@ Serving Razor component through Minimal API endpoint - in .NET 8.
 
 Based on the ``dotnet new webapi`` template. Adds code that exposes the ``blazor.web.js`` script as a static file.
 
-Endpoint URL: http://localhost:5277/test
+Both Server and WebAssembly (below).
+
+Endpoints: http://localhost:5277/server and http://localhost:5277/wasm
 
 Links to resources below.
 
@@ -52,15 +54,29 @@ Since it maps components to routes automatically - And you want the control over
 
 ## Adding WebAssembly support
 
-**!! Not tested !!** - I think that you might need to do some more.
+First. Create a standalone Blazor WebAssembly project for your client-side code.
 
-Add this to the ``.csproj``:
+```
+dotnet new blazorwasm
+``````
+
+Reference the client WebAssembly project from the Server project.
+
+### Server project
+
+Add package reference:
+
+``````
+dotnet add package Microsoft.AspNetCore.Components.WebAssembly.Server --prerelease
+``````
+
+or add this to the ``.csproj``:
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.1.*" />
 ```
 
-Update the ``Program.cs`` by adding ``AddWebAssemblyComponents``:
+Update the ``Program.cs`` by adding a call to ``AddWebAssemblyComponents``:
 
 ```cs
 builder.Services.AddRazorComponents()
@@ -68,11 +84,21 @@ builder.Services.AddRazorComponents()
     .AddWebAssemblyComponents();
 ```
 
+Use custom extension method that maps endpoint that exposes Blazor framework files.
+
+```cs
+app.UseBlazorWebAssemblyRenderMode();
+```
+
 Then set the render mode of, for instance, ``Counter``.
 
 ```razor
 @attribute [RenderModeWebAssembly]
 ```
+
+It is important that the WebAssembly component lives in the client project, otherwise it will not run in the browser.
+
+### Note
 
 I'm not sure whether this will work with ``RenderModeAuto``.
 
