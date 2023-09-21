@@ -50,7 +50,44 @@ Based on [this file](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79b
 
 ## Why not invoke ``MapRazorComponents<T>``?
 
-Since it maps components to routes automatically - And you want the control over the endpoints.
+Since it maps components to routes automatically - and you want the control over the endpoints.
+
+## What about layouts?
+
+Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``. We aren't using, and  we can't use this here.
+
+This is thus no direct replacement for the MVC and Razor Views.
+
+## Add routable pages
+
+**This is what is recommended for ordinary apps**
+
+If you want something similar to Razor Pages, then you can enable the standard page component routing. This is provided that you have declared the router in the root ``App`` component.
+
+```cs
+app.MapRazorComponents<App>()
+    .AddWebAssemblyRenderMode()
+    .AddServerRenderMode()
+    .AddAdditionalAssemblies(typeof(Counter).Assembly);
+```
+
+The router in ``App.razor``:
+
+```cs
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+
+        </RouteView>
+    </Found>
+</Router>
+```
+
+And add the ``@page`` directive to your page components:
+
+```razor
+@page "/my-route"
+```
 
 ## Adding WebAssembly support
 
@@ -98,7 +135,7 @@ Then set the render mode of, for instance, ``Counter``.
 
 It is important that the WebAssembly component lives in the client project, otherwise it will not run in the browser.
 
-### Note
+### Notes
 
 I'm not sure whether this will work with ``RenderModeAuto``.
 
