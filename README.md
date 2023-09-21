@@ -1,6 +1,6 @@
 # Minimal API with interactive Razor component
 
-Serving Razor component through Minimal API endpoint.
+Serving Razor component through Minimal API endpoint - in .NET 8.
 
 Based on the ``dotnet new webapi`` template.
 
