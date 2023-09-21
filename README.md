@@ -136,7 +136,7 @@ And add the ``@page`` directive to your page components:
 @page "/my-route"
 ```
 
-### Notes
+## Notes
 
 I'm not sure whether this will work with ``RenderModeAuto``.
 
