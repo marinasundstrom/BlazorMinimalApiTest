@@ -58,6 +58,8 @@ Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``
 
 This is thus no direct replacement for the MVC and Razor Views.
 
+If layouts are important to you, then I recommend you to consider routable page components. (See "Add routable pages" below)
+
 ## Adding WebAssembly support
 
 First. Create a standalone Blazor WebAssembly project for your client-side code.
@@ -107,7 +109,7 @@ It is important that the WebAssembly component lives in the client project, othe
 
 ## Add routable pages
 
-**This is what is recommended for ordinary apps**
+**Recommended for ordinary apps**
 
 If you want something similar to Razor Pages, then you can enable the standard page component routing. This is provided that you have declared the router in the root ``App`` component.
 
