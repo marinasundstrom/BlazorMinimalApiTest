@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Endpoints;
 using Microsoft.AspNetCore.Builder;
+using BlazorMinimalApi.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,13 +48,13 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/server", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPage>());
+app.MapGet("/server", () => new RazorComponentResult<MyPage>());
 
 app.MapGet("/wasm", (int incrementBy) => {
     var parameters = new Dictionary<string, object> {
-        { nameof(BlazorMinimalApi.Components.MyPageWasm.IncrementBy), incrementBy }
+        { nameof(MyPageWasm.IncrementBy), incrementBy }
     };
-    return new RazorComponentResult<BlazorMinimalApi.Components.MyPageWasm>(parameters);
+    return new RazorComponentResult<MyPageWasm>(parameters);
 });
 
 
