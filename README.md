@@ -6,12 +6,14 @@ Based on the ``dotnet new webapi`` template. Adds code that exposes the ``blazor
 
 Endpoint URL: http://localhost:5277/test
 
+Links to resources below.
+
 ## Changes
 
 Created components:
 
 * ``Counter`` - Interactive on the server.
-* ``MyPage`` - equivalent to an ``index.html`` page (Server-side-rendered)
+* ``MyPage`` - equivalent to an ``index.html`` page (Server-side rendered)
 
 Register Razor component services:
 
@@ -25,7 +27,6 @@ Serve the Blazor JS script:
 ```cs 
 app.UseBlazorWebJS()
 ```
-
 
 Map endpoint:
 
@@ -45,13 +46,13 @@ Adds the route serving the ``blazor.web.js``
 
 Based on [this file](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79bf5bc84098ea8d347ef358cc/src/Components/Endpoints/src/Builder/RazorComponentsEndpointRouteBuilderExtensions.cs#L28).
 
-## Why not invoking ``MapRazorComponents<T>``?
+## Why not invoke ``MapRazorComponents<T>``?
 
 Since it maps components to routes automatically - And you want the control over the endpoints.
 
-## WebAssembly
+## Adding WebAssembly support
 
-**Not tested**
+**!! Not tested !!** - I think that you might need to do some more.
 
 Add this to the ``.csproj``:
 
@@ -73,4 +74,9 @@ Then set the render mode of, for instance, ``Counter``.
 @attribute [RenderModeWebAssembly]
 ```
 
-Should work with ``RenderModeAuto``.
+I'm not sure whether this will work with ``RenderModeAuto``.
+
+## Links
+
+* [ASP.NET Core Razor components](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/?view=aspnetcore-7.0)
+* [RazorComponentResult Class](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.endpoints.razorcomponentresult?view=aspnetcore-8.0)
