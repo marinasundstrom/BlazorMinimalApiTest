@@ -2,7 +2,7 @@
 
 Serving Razor component through Minimal API endpoint - in .NET 8.
 
-Based on the ``dotnet new webapi`` template.
+Based on the ``dotnet new webapi`` template. Adds code that exposes the ``blazor.web.js`` script as a static file.
 
 Endpoint URL: http://localhost:5277/test
 
