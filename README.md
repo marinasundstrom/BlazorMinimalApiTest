@@ -58,37 +58,6 @@ Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``
 
 This is thus no direct replacement for the MVC and Razor Views.
 
-## Add routable pages
-
-**This is what is recommended for ordinary apps**
-
-If you want something similar to Razor Pages, then you can enable the standard page component routing. This is provided that you have declared the router in the root ``App`` component.
-
-```cs
-app.MapRazorComponents<App>()
-    .AddWebAssemblyRenderMode()
-    .AddServerRenderMode()
-    .AddAdditionalAssemblies(typeof(Counter).Assembly);
-```
-
-The router in ``App.razor``:
-
-```cs
-<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-
-        </RouteView>
-    </Found>
-</Router>
-```
-
-And add the ``@page`` directive to your page components:
-
-```razor
-@page "/my-route"
-```
-
 ## Adding WebAssembly support
 
 First. Create a standalone Blazor WebAssembly project for your client-side code.
@@ -134,6 +103,38 @@ Then set the render mode of, for instance, ``Counter``.
 ```
 
 It is important that the WebAssembly component lives in the client project, otherwise it will not run in the browser.
+
+
+## Add routable pages
+
+**This is what is recommended for ordinary apps**
+
+If you want something similar to Razor Pages, then you can enable the standard page component routing. This is provided that you have declared the router in the root ``App`` component.
+
+```cs
+app.MapRazorComponents<App>()
+    .AddWebAssemblyRenderMode()
+    .AddServerRenderMode()
+    .AddAdditionalAssemblies(typeof(Counter).Assembly);
+```
+
+The router in ``App.razor``:
+
+```cs
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+
+        </RouteView>
+    </Found>
+</Router>
+```
+
+And add the ``@page`` directive to your page components:
+
+```razor
+@page "/my-route"
+```
 
 ### Notes
 
