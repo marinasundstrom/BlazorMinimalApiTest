@@ -44,3 +44,33 @@ app.MapBlazorHub();
 Adds the route serving the ``blazor.web.js``
 
 Based on [this file](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79bf5bc84098ea8d347ef358cc/src/Components/Endpoints/src/Builder/RazorComponentsEndpointRouteBuilderExtensions.cs#L28).
+
+## Why not invoking ``MapRazorComponents<T>``?
+
+Since it maps components to routes automatically - And you want the control over the endpoints.
+
+## WebAssembly
+
+**Not tested**
+
+Add this to the ``.csproj``:
+
+```xml
+<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.1.*" />
+```
+
+Update the ``Program.cs`` by adding ``AddWebAssemblyComponents``:
+
+```cs
+builder.Services.AddRazorComponents()
+    .AddServerComponents()
+    .AddWebAssemblyComponents();
+```
+
+Then set the render mode of, for instance, ``Counter``.
+
+```razor
+@attribute [RenderModeWebAssembly]
+```
+
+Should work with ``RenderModeAuto``.
