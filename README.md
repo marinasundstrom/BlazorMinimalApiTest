@@ -154,9 +154,9 @@ Other than adding extension methods that map those static files, there is no mag
 
 ### Why not invoke ``MapRazorComponents<T>``?
 
-Since it maps components to routes automatically - and you want the control over the endpoints.
+Since it maps components to routes automatically - and you probably want control over the endpoints.
 
-### Why can't I server an interactive component directly from ane endpoint?
+### Why can't I serve an interactive component directly from ane endpoint?
 
 Why must I put the interactive component in a component that is served as static SSR?
 
