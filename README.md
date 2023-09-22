@@ -44,7 +44,7 @@ Map endpoint:
 app.MapGet("/test", () => new RazorComponentResult<BlazorMinimalApi.Components.MyPage>());
 ```
 
-Map Blazor Hub:
+Map Blazor Hub - important for interactive Server components:
 
 ```cs
 app.MapBlazorHub();
@@ -100,6 +100,12 @@ Then set the render mode of, for instance, ``Counter``.
 
 ```razor
 @attribute [RenderModeWebAssembly]
+```
+
+Or through the directive:
+
+```razor
+<Counter @rendermode="@RenderMode.WebAssembly" />
 ```
 
 It is important that the WebAssembly component lives in the client project, otherwise it will not run in the browser.
