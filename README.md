@@ -1,6 +1,6 @@
 # Minimal API with interactive Razor component
 
-Serving interactive Razor component through Minimal API endpoint - in .NET 8.
+Serving interactive Razor component through Minimal API endpoint - in .NET 8. Both Server and WebAssembly.
 
 ![BlazorWasm](https://github.com/marinasundstrom/BlazorMinimalApiTest/assets/919580/697ddb62-9a1a-40bb-b97c-882b95875b99)
 
