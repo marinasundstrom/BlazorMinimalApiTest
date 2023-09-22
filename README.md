@@ -2,17 +2,19 @@
 
 Serving interactive Razor component through Minimal API endpoint - in .NET 8.
 
-![BöazorWasm](https://github.com/marinasundstrom/BlazorMinimalApiTest/assets/919580/697ddb62-9a1a-40bb-b97c-882b95875b99)
+![BlazorWasm](https://github.com/marinasundstrom/BlazorMinimalApiTest/assets/919580/697ddb62-9a1a-40bb-b97c-882b95875b99)
 
 ## Description
 
-Based on the ``dotnet new webapi`` template. Adds extension method that exposes the ``blazor.web.js`` script as a static file.
+Based on the ``dotnet new webapi`` template. 
+
+Adds extension method that exposes the ``blazor.web.js`` script as a static file.
 
 To enable client WebAssembly support, there is another extension method that serves those files, including ``dotnet.js``.
 
-bGuides for oth Server and WebAssembly below.
+Guides for Server and WebAssembly below.
 
-Endpoints: http://localhost:5277/server and http://localhost:5277/wasm
+Endpoints: http://localhost:5277/server and http://localhost:5277/wasm?incrementBy=2
 
 [FAQ](#frequently-asked-questions) and [Links](#links) to resources at the bottom.
 
@@ -55,6 +57,8 @@ Adds the route serving the ``blazor.web.js``, which is essential to all interact
 Based on [this file](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79bf5bc84098ea8d347ef358cc/src/Components/Endpoints/src/Builder/RazorComponentsEndpointRouteBuilderExtensions.cs#L28).
 
 ## Adding WebAssembly support
+
+**You need to restructure your solution into having one Server project, and one Client project (for WebAssembly).**
 
 First. Create a standalone Blazor WebAssembly project for your client-side code.
 
@@ -145,6 +149,14 @@ Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``
 This is thus no direct replacement for the MVC and Razor Views.
 
 If layouts are important to you, then I recommend you to consider routable page components. (See "Add routable pages" below)
+
+### Does JS Interop work?
+
+Yes. It should just work since it is being registered with the Blazor services.
+
+```cs
+builder.Services.AddRazorComponents();
+``````
 
 ## Notes
 
