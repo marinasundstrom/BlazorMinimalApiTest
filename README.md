@@ -144,17 +144,33 @@ And add the ``@page`` directive to your page components:
 
 ## Frequently asked questions
 
+### Is this supported?
+
+No. It is not supported. Though the possibility to support it is there.
+
+What is currently lacking in .NET 8 RC1, it that there is no way to map the required JavaScript files outside the specific APIs what the Blazor team had constructed.
+
+Other than adding extension methods that map those static files, there is no magic here.
+
 ### Why not invoke ``MapRazorComponents<T>``?
 
 Since it maps components to routes automatically - and you want the control over the endpoints.
 
+### Why can't I server an interactive component directly from ane endpoint?
+
+Why must I put the interactive component in a component that is served as static SSR?
+
+Because you need a static page within which you can host the interactive component - similar to an ``index.html``. A structure of content which isn't affected by the interactivity,
+
+This also re-assures that the script gets loaded first, and not reloaded with any interactive component.
+
 ### What about layouts?
 
-Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``. We aren't using, and  we can't use this here.
+Page layouts are applied in combination with Blazor ``Router`` and ``RouteView``. We aren't using, and we can't use this here.
 
-This is thus no direct replacement for the MVC and Razor Views.
+This is thus no direct replacement for MVC and Razor Views.
 
-If layouts are important to you, then I recommend you to consider routable page components. (See "Add routable pages" below)
+If layouts are important to you, then I recommend you to consider routable page components. (See [Add routable pages](#add-routable-pages) above)
 
 ### Does JS Interop work?
 
