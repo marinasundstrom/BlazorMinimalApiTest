@@ -50,7 +50,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/server", () => new RazorComponentResult<MyPage>());
 
-app.MapGet("/wasm", (int incrementBy) => {
+app.MapGet("/wasm", (int incrementBy = 1) => {
     var parameters = new Dictionary<string, object> {
         { nameof(MyPageWasm.IncrementBy), incrementBy }
     };
